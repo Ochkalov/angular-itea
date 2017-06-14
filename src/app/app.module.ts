@@ -1,16 +1,18 @@
-import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { BrowserModule } from "@angular/platform-browser";
+import { NgModule } from "@angular/core";
 
-import { AppComponent } from './app.component';
-import { HomeComponent } from './home/home.component';
+import { AppComponent } from "./app.component";
+import { HomeComponent } from "./home/home.component";
 
-import { BoldDirective } from './directives/bold.directive';
+import { BoldDirective } from "./directives/bold.directive";
+import { WhileDirective } from "./directives/while.directive";
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
-    BoldDirective
+    BoldDirective,
+    WhileDirective
   ],
   imports: [
     BrowserModule

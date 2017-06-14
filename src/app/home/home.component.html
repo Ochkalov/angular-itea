@@ -14,4 +14,10 @@
     <!-- Applied bold directive for each item in list -->
     <li [bold]>{{item}}</li>
   </ng-template>
-</ul> 
+</ul>
+<!-- Example of created while.directive --> 
+<ul>
+  <ng-template ngFor let-item [ngForOf]="items">
+    <li *while="item !== 'Item 6'">{{item}}</li>
+  </ng-template>
+</ul>
