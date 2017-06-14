@@ -1,3 +1,17 @@
-<p>
-  home works!
-</p>
+<!-- Used ngStyle directive to change list-style-type -->
+<nav [ngStyle]="{ 'list-style-type': 'none' }">
+  <!-- Used ngFor directive with ng-template to provide less html elements in DOM and let elements of navItems array in component -->
+  <ng-template ngFor let-navItem [ngForOf]="navItems">
+    <!-- Used ngStyle & ngClass directives with another syntax to change font size, font weight and font color of li items -->
+    <li [style.fontSize]="'18px'"
+        [class.bold-font]="navItem === 'Home' || navItem === 'Catalog'"
+        [class.red-font]="navItem === 'Catalog' || navItem === 'About Us'">{{navItem}}</li>
+  </ng-template>
+</nav>
+<!-- Created a new ngFor item -->
+<ul>
+  <ng-template ngFor let-item [ngForOf]="items">
+    <!-- Applied bold directive for each item in list -->
+    <li [bold]>{{item}}</li>
+  </ng-template>
+</ul> 
