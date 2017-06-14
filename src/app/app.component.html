@@ -2,7 +2,11 @@
 <nav>
     <li *ngFor="let item of navItems">
         <!-- Added navigation links with routerLink directive to provide app navigation beetwen components -->
-        <a [routerLink]="item.link">{{item.name}}</a>
+        <!-- Added routerLinkActive directive to style active link -->
+        <!-- routerLinkActiveOptions is used for applying exactly for direct link -->
+        <a [routerLink]="item.link"
+           routerLinkActive="active-link"
+           [routerLinkActiveOptions]="{exact: true}">{{item.name}}</a>
     </li>
 </nav>
 
