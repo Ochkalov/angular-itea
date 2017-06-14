@@ -6,15 +6,18 @@ import { Component } from "@angular/core";
   styleUrls: ["./home.component.css"]
 })
 export class HomeComponent {
-  //define array of navigation items:
+  // define array of navigation items:
   navItems: string[] = [
     "Home", "Catalog", "About Us"
   ];
 
-  //define array of some strings for using with bold directive
+  // define array of some strings for using with bold directive
   items: string[] = [
     "Item 1", "Item 2", "Item 3", "Item 4", "Item 5", "Item 6"
   ]
+
+  // define new variable x with number type
+  x: number = 8;
 
   constructor() { }
 

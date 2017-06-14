@@ -8,6 +8,7 @@
         [class.red-font]="navItem === 'Catalog' || navItem === 'About Us'">{{navItem}}</li>
   </ng-template>
 </nav>
+
 <!-- Created a new ngFor item -->
 <ul>
   <ng-template ngFor let-item [ngForOf]="items">
@@ -15,9 +16,13 @@
     <li [bold]>{{item}}</li>
   </ng-template>
 </ul>
+
 <!-- Example of created while.directive --> 
 <ul>
   <ng-template ngFor let-item [ngForOf]="items">
     <li *while="item !== 'Item 6'">{{item}}</li>
   </ng-template>
 </ul>
+
+<!-- Example of created factorial.pipe -->
+<p>Факториал числа {{x}} равен {{x | factorial}}</p>
