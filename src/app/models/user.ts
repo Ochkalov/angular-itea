@@ -2,13 +2,13 @@ export class User {
     public firstName: string;
     public lastName: string;
     public email: string;
-    public age: number;
+    public age: string;
 
     constructor(
         firstName: string,
         lastName: string,
         email: string,
-        age: number
+        age: string
     ) {
         this.firstName = firstName;
         this.lastName = lastName;
