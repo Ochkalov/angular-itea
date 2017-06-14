@@ -1,6 +1,8 @@
 import { BrowserModule } from "@angular/platform-browser";
 import { NgModule } from "@angular/core";
 
+import { RoutingModule } from "./routing.module";
+
 import { AppComponent } from "./app.component";
 import { HomeComponent } from "./home/home.component";
 
@@ -13,18 +15,19 @@ import { JoinPipe } from "./pipes/join.pipe";
 import { UsersService } from "./services/users.service";
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    HomeComponent,
-    BoldDirective,
-    WhileDirective,
-    FactorialPipe,
-    JoinPipe
-  ],
-  imports: [
-    BrowserModule
-  ],
-  providers: [UsersService],
-  bootstrap: [AppComponent]
+    declarations: [
+        AppComponent,
+        HomeComponent,
+        BoldDirective,
+        WhileDirective,
+        FactorialPipe,
+        JoinPipe
+    ],
+    imports: [
+        BrowserModule,
+        RoutingModule
+    ],
+    providers: [UsersService],
+    bootstrap: [AppComponent]
 })
 export class AppModule { }
