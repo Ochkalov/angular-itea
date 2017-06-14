@@ -8,7 +8,9 @@ import { BoldDirective } from "./directives/bold.directive";
 import { WhileDirective } from "./directives/while.directive";
 
 import { FactorialPipe } from "./pipes/factorial.pipe";
-import { JoinPipe } from "./pipes/join.pipe"
+import { JoinPipe } from "./pipes/join.pipe";
+
+import { UsersService } from "./services/users.service";
 
 @NgModule({
   declarations: [
@@ -22,7 +24,7 @@ import { JoinPipe } from "./pipes/join.pipe"
   imports: [
     BrowserModule
   ],
-  providers: [],
+  providers: [UsersService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

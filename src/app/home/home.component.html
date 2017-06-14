@@ -30,3 +30,10 @@
 <!-- Example of created join.pipe -->
 <p>{{items}}</p>
 <p>Join pipe: {{items | join:1:4}}</p>
+
+<!-- Example of created user.service -->
+<ul>
+    <li *ngFor="let user of users; index as i">
+        {{i}}: {{user.firstName}} | {{user.lastName}}
+    </li>
+</ul>
