@@ -1,7 +1,13 @@
 import {Directive, ElementRef, HostListener, Input, Renderer2} from "@angular/core";
  
 @Directive({
-    selector: "[bold]"
+    selector: "[bold]",
+    // Used host property instead of @HostListener decorator to bind methods to events
+    host: {
+        // "(event name)": "method which will be call on event"
+        "(mouseenter)":"onMouseEnter()",
+        "(mouseleave)":"onMouseLeave()"
+    }
 })
 export class BoldDirective{
     // Used @Input decorator to get element which uses [bold]
@@ -12,13 +18,13 @@ export class BoldDirective{
         this.renderer2.setStyle(this.elementRef.nativeElement, "cursor", "pointer");
     }
     
-    // Used @HostListener decorator to listen event and call method
-    @HostListener("mouseenter") onMouseEnter() {
+    // Method to set bold font to element
+    onMouseEnter() {
         this.setFontWeight("bold");
     }
     
-    // Used @HostListener decorator to listen event and call method
-    @HostListener("mouseleave") onMouseLeave() {
+    // Method to set normal to element
+    onMouseLeave() {
         this.setFontWeight("normal");
     }
     
