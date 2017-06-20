@@ -6,17 +6,32 @@ import { User } from "../models/user";
 export class UsersService {
 
     private users: User[] = [
-        { firstName: "John", lastName: "Johnson", email: "jjohnson@mail.com", age: "32"},
-        { firstName: "Jack", lastName: "Jackson", email: "jjackson@mail.com", age: "25"},
-        { firstName: "Lois", lastName: "Lane", email: "llane@mail.com", age: "27"},
-        { firstName: "Kate", lastName: "King", email: "kking@mail.com", age: "30"}
+        { id: 1, firstName: "John", lastName: "Johnson", email: "jjohnson@mail.com", age: "32"},
+        { id: 2, firstName: "Jack", lastName: "Jackson", email: "jjackson@mail.com", age: "25"},
+        { id: 3, firstName: "Lois", lastName: "Lane", email: "llane@mail.com", age: "27"},
+        { id: 4, firstName: "Kate", lastName: "King", email: "kking@mail.com", age: "30"}
     ]
 
     getUsers(): User[] {
         return this.users;
     }
 
-    addUser(firstName: string, lastName: string, email: string, age: string) {
-        this.users.push(new User(firstName, lastName, email, age));
+    addUser(user:User) {
+      let usr = user;
+        if (usr.id === undefined || usr.id === null){
+          usr.id = this.users.length +1;
+          this.users.push(usr);
+        } else {
+          this.editUser(usr);
+        }
+
+    }
+
+    editUser(user: User) {
+      let i:number = this.users.findIndex(item => item.id === user.id);
+
+      if (i !== -1) {
+        this.users[i] = user;
+      }
     }
 }
