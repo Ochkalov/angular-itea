@@ -1,32 +1,67 @@
 <!-- Display all users from user service -->
 <ul>
-    <li *ngFor="let user of users">
-        {{user.firstName}} | {{user.lastName}}
+  <ng-template ngFor let-user [ngForOf]="users">
+    <li (click)="onSelect(user)">
+      {{user.firstName}} | {{user.lastName}}
     </li>
+  </ng-template>
 </ul>
 <div>
-    <!-- Added template-driven form to home.component -->
-    <!-- define #userForm="ngForm" as form object (ngSumbit) calls method after submitting form -->
-    <form #userForm="ngForm" novalidate (ngSubmit)="onSubmit($event, userForm)">
-        <div>
-            <label for="firstName">First Name:</label>
-            <input id="firstName" name="firstName" type="text" ngModel required>
+  <!-- Added data-driven form instead of template-driven in home.component -->
+  <!-- define formGroup directive and pass variable of form group -->
+  <form [formGroup]="userForm" class="form" (ngSubmit)="onSubmit($event, userForm)" novalidate>
+    <div class="form__row">
+      <label for="firstName">First Name:</label>
+      <!-- Added error messages and method to clean validation -->
+      <div class="form__input">
+        <input id="firstName"
+               (change)="clearControlValidation('firstName')"
+               (focus)="clearControlValidation('firstName')"
+               formControlName="firstName" type="text" >
+        <div class="message message__error" *ngIf="isFormSubmitted && userForm.controls['firstName'].invalid && userForm.controls['firstName'].untouched">
+          First Name is required
         </div>
-        <div>
-            <label for="lastName">Last Name:</label>
-            <input id="lastName" name="lastName" type="text" ngModel required>
+      </div>
+    </div>
+    <div class="form__row">
+      <label for="lastName">Last Name:</label>
+      <!-- Added error messages and method to clean validation -->
+      <div class="form__input">
+        <input id="lastName"
+               (change)="clearControlValidation('lastName')"
+               (focus)="clearControlValidation('lastName')"
+               formControlName="lastName" type="text" >
+        <div class="message message__error" *ngIf="isFormSubmitted && userForm.controls['lastName'].invalid && userForm.controls['lastName'].untouched">
+          Last Name is required
         </div>
-        <div>
-            <label for="email">Email:</label>
-            <input id="email" name="email" type="email" ngModel required 
-                   pattern="[a-zA-Z_]+@[a-zA-Z_]+?\.[a-zA-Z]{2,4}">
+      </div>
+    </div>
+    <div class="form__row">
+      <label for="email">Email:</label>
+      <!-- Added error messages and method to clean validation -->
+      <div class="form__input">
+        <input id="email"
+               (change)="clearControlValidation('email')"
+               (focus)="clearControlValidation('email')"
+               formControlName="email" type="email" >
+        <div class="message message__error" *ngIf="isFormSubmitted && userForm.controls['email'].invalid && userForm.controls['email'].untouched">
+                    <span *ngIf="userForm.controls['email'].hasError('required')">
+                        Email is required
+                    </span>
+          <span *ngIf="userForm.controls['email'].hasError('pattern')">
+                        Email is not valid
+                    </span>
         </div>
-        <div>
-            <label for="age">Age:</label>
-            <input id="age" name="age" type="text" ngModel>
-        </div>
-        <div>
-            <input type="submit" value="submit" [disabled]="userForm.invalid">
-        </div>
-    </form>
+      </div>
+    </div>
+    <div class="form__row">
+      <label for="age">Age:</label>
+      <div class="form__input">
+        <input id="age" formControlName="age" type="text">
+      </div>
+    </div>
+    <div class="form__row">
+      <input type="submit" value="submit">
+    </div>
+  </form>
 </div>
