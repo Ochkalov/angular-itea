@@ -1,6 +1,6 @@
 import { BrowserModule } from "@angular/platform-browser";
 import { NgModule } from "@angular/core";
-import { FormsModule } from "@angular/forms";
+import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 
 import { RoutingModule } from "./routing.module";
 
@@ -19,23 +19,24 @@ import { JoinPipe } from "./pipes/join.pipe";
 import { UsersService } from "./services/users.service";
 
 @NgModule({
-    declarations: [
-        AppComponent,
-        CatalogComponent,
-        ContactUsComponent,
-        HomeComponent,
-        NotFoundComponent,
-        BoldDirective,
-        WhileDirective,
-        FactorialPipe,
-        JoinPipe
-    ],
-    imports: [
-        BrowserModule,
-        FormsModule,
-        RoutingModule
-    ],
-    providers: [UsersService],
-    bootstrap: [AppComponent]
+  declarations: [
+    AppComponent,
+    CatalogComponent,
+    ContactUsComponent,
+    HomeComponent,
+    NotFoundComponent,
+    BoldDirective,
+    WhileDirective,
+    FactorialPipe,
+    JoinPipe
+  ],
+  imports: [
+    BrowserModule,
+    FormsModule,
+    ReactiveFormsModule,
+    RoutingModule
+  ],
+  providers: [UsersService],
+  bootstrap: [AppComponent]
 })
 export class AppModule { }
