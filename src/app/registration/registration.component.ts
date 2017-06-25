@@ -20,7 +20,7 @@ export class RegistrationComponent implements OnInit {
   user: User;
 
   constructor(
-    private formBilder: FormBilder,
+    private formBuilder: FormBuilder,
     private userService: UsersService
   ){}
 
