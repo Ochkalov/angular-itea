@@ -6,6 +6,12 @@ import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { UsersService } from "../services/users.service";
 
 import { User } from "../models/user";
+import "rxjs/add/operator/toPromise";
+
+import { Observable } from "rxjs/Observable";
+import "rxjs/add/operator/map";
+// import "rxjs/add/operator/catch";
+// import "rxjs/add/operator/throw";
 
 @Component({
   selector: "app-home",
@@ -13,6 +19,8 @@ import { User } from "../models/user";
   styleUrls: ["./home.component.css"]
 })
 export class HomeComponent implements OnInit {
+
+
   // define variable to detect when form submitted
   isFormSubmitted: boolean = false;
   // define users variable
@@ -28,9 +36,7 @@ export class HomeComponent implements OnInit {
     // Add method which using FormBuilder class to build data-driven form
     private formBuilder: FormBuilder,
     private userService: UsersService
-  ) {
-    this.users = this.userService.getUsers();
-  }
+  ) {}
 
   // Method to clean validation on fields
   clearControlValidation(name: string) {
@@ -61,7 +67,7 @@ export class HomeComponent implements OnInit {
     if (this.userForm.valid) {
       // Added variable user as form value to push new user
       let user: User = form.value;
-      this.userService.addUser(user);
+      // this.userService.addUser(user);
       this.userForm.reset();
       this.isFormSubmitted = false;
     }
@@ -76,6 +82,17 @@ export class HomeComponent implements OnInit {
       email: [this.selectedUser ? this.selectedUser.email : null, [Validators.required, Validators.pattern(this.REG_EXP)]],
       age: [this.selectedUser ? this.selectedUser.age : null]
     });
-  }
 
+    this.userService.getUsers()
+      .then(
+        data => this.users = data
+      )
+     /* .subscribe(
+        data => this.users = data,
+        err => {
+          this.error = err;
+          console.log(this.error)
+        }
+      )*/
+  }
 }

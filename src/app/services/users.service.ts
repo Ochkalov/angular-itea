@@ -1,40 +1,74 @@
 import { Injectable } from "@angular/core";
 
+import { Http, Response } from "@angular/http";
+
 import { User } from "../models/user";
+
+import "rxjs/add/operator/toPromise";
+// import {Observable} from "rxjs/Observable";
 
 @Injectable()
 export class UsersService {
 
-  private users: User[] = [
-    { id: 1, firstName: "John", lastName: "Johnson", email: "jjohnson@mail.com", age: "32"},
-    { id: 2, firstName: "Jack", lastName: "Jackson", email: "jjackson@mail.com", age: "25"},
-    { id: 3, firstName: "Lois", lastName: "Lane", email: "llane@mail.com", age: "27"},
-    { id: 4, firstName: "Kate", lastName: "King", email: "kking@mail.com", age: "30"}
-  ]
+  constructor(
+    private http: Http
+  ){}
 
-  getUsers(): User[] {
-    return this.users;
+  getUsers(): Promise<User[]> {
+      const URL = "./assets/users.json";
+      return this.http.get(URL)
+        .toPromise()
+        .then(
+              response => response.json() as User[]
+        )
+        .catch(
+          error => this.errorHandler(error)
+        )
   }
 
-  addUser(user: User) {
-    let usr = user;
-    // If user has no id then add it to list
-    if (usr.id === undefined || usr.id === null) {
-      usr.id = this.users.length + 1;
-      // Change variable user to use adding without class constructor
-      this.users.push(usr);
-    } else {
-      // Call method to change existing user
-      this.editUser(usr);
-    }
+
+  private  errorHandler(err: any) {
+      return console.log(err);
   }
 
-  // Method which allows to edit existing user
-  editUser(user: User) {
-    let i: number = this.users.findIndex(item => item.id === user.id);
-
-    if (i !== -1) {
-      this.users[i] = user;
-    }
+  addUser(data:User):Promise<User>{
+   const URL = "api/addUser";
+   return this.http.post(URL,data,this.headers)
+     .toPromise()
+     .then(
+       response => response.json() as User
+     )
+     .catch(
+       error => this.errorHandler(error)
+     )
   }
+       private  headers:Headers = new Headers({"Content-Type":"aplication-json"})
+
+  registerUser(reg:User):Promise<User> {
+
+  }
+
+
+
+  // addUser(user: User) {
+  //   let usr = user;
+  //   // If user has no id then add it to list
+  //   if (usr.id === undefined || usr.id === null) {
+  //     usr.id = this.users.length + 1;
+  //     // Change variable user to use adding without class constructor
+  //     this.users.push(usr);
+  //   } else {
+  //     // Call method to change existing user
+  //     this.editUser(usr);
+  //   }
+  // }
+  //
+  // // Method which allows to edit existing user
+  // editUser(user: User) {
+  //   let i: number = this.users.findIndex(item => item.id === user.id);
+  //
+  //   if (i !== -1) {
+  //     this.users[i] = user;
+  //   }
+  // }
 }
