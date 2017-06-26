@@ -6,12 +6,6 @@ import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { UsersService } from "../services/users.service";
 
 import { User } from "../models/user";
-import "rxjs/add/operator/toPromise";
-
-import { Observable } from "rxjs/Observable";
-import "rxjs/add/operator/map";
-// import "rxjs/add/operator/catch";
-// import "rxjs/add/operator/throw";
 
 @Component({
   selector: "app-home",
@@ -19,8 +13,6 @@ import "rxjs/add/operator/map";
   styleUrls: ["./home.component.css"]
 })
 export class HomeComponent implements OnInit {
-
-
   // define variable to detect when form submitted
   isFormSubmitted: boolean = false;
   // define users variable
@@ -87,12 +79,6 @@ export class HomeComponent implements OnInit {
       .then(
         data => this.users = data
       )
-     /* .subscribe(
-        data => this.users = data,
-        err => {
-          this.error = err;
-          console.log(this.error)
-        }
-      )*/
   }
+
 }
