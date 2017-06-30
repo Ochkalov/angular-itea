@@ -2,6 +2,8 @@ import { Component, OnInit } from "@angular/core";
 // Import FormBuilder and FormGroup modules for using data-driven forms
 // Import Validators class for validation
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
+// Imported trigger, state, style, animate, transition to work with angular animations
+import { trigger, state, style, animate, transition } from "@angular/animations";
 
 import { UsersService } from "../services/users.service";
 
@@ -10,7 +12,22 @@ import { User } from "../models/user";
 @Component({
   selector: "app-home",
   templateUrl: "./home.component.html",
-  styleUrls: ["./home.component.css"]
+  styleUrls: ["./home.component.css"],
+  animations: [
+    trigger("userState", [
+      state("inactive", style({
+        backgroundColor: "#eee",
+        transform: "scale(1)",
+        width:"*"
+      })),
+      state("active", style({
+        backgroundColor: "#cfd8dc",
+        transform: "scale(1.1)"
+      })),
+      transition("inactive => inactive", animate("300ms ease-in")),
+      transition("active => active", animate("300ms ease-out"))
+    ])
+  ]
 })
 export class HomeComponent implements OnInit {
   // define variable to detect when form submitted
@@ -30,9 +47,22 @@ export class HomeComponent implements OnInit {
     private userService: UsersService
   ) {}
 
+  addNewUser(){
+    this.selectedUser = new User;
+  }
+
   // Method to clean validation on fields
   clearControlValidation(name: string) {
     this.userForm.controls[name].markAsTouched();
+  }
+
+  onMouseEnter(user:User) {
+    this.user = user;
+    this.user.state = "active"
+  }
+  onMouseLeave(user:User) {
+    this.user = user;
+    this.user.state = "inactive"
   }
 
   // Method to select existing user form list
@@ -57,12 +87,25 @@ export class HomeComponent implements OnInit {
     this.userForm.controls["email"].markAsUntouched();
 
     if (this.userForm.valid) {
+      if (this.userForm.controls["id"].value === null) {
+        this.userForm.controls["id"].setValue(this.users.length) ;
+        this.users.push(form.value);
+      }
+
       // Added variable user as form value to push new user
       let user: User = form.value;
       // this.userService.addUser(user);
       this.userForm.reset();
       this.isFormSubmitted = false;
     }
+  }
+
+  resetForm() {
+    this.userForm.reset();
+  }
+
+  toggleState() {
+    this.selectedUser.state === "inactive" ? this.selectedUser.state = "active" : this.selectedUser.state = "inactive";
   }
 
   // Added building of data-driven form in OnInit method
@@ -77,7 +120,10 @@ export class HomeComponent implements OnInit {
 
     this.userService.getUsers()
       .then(
-        data => this.users = data
+        data => {
+          this.users = data;
+          this.users.forEach(user => user.state = "inactive");
+        }
       )
   }
 

@@ -1,4 +1,6 @@
 import { BrowserModule } from "@angular/platform-browser";
+// Imported Animations module fro angular animations
+import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { NgModule } from "@angular/core";
 // Added import of ReactiveFormsModule to work with data-driven forms
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
@@ -36,6 +38,7 @@ import { UsersService } from "./services/users.service";
     JoinPipe
   ],
   imports: [
+    BrowserAnimationsModule,
     BrowserModule,
     FormsModule,
     HttpModule,
