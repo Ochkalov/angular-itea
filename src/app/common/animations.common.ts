@@ -7,7 +7,7 @@ export namespace Animations {
       style({transform: "translateX(-100%)"}),
       animate(300)
     ]),
-    transition('* => void', [
+    transition("* => void", [
       animate(300, style({transform: "translateX(100%)"}))
     ])
   ]);

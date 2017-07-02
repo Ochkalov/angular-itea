@@ -1,15 +1,17 @@
 import { Component, OnInit } from "@angular/core";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
-import {RegExpCommon} from "../common/regexp.common";
+
+import { RegExpCommon } from "../common/regexp.common";
 
 @Component({
   selector: "app-authorization",
   templateUrl: "./authorization.component.html",
   styleUrls: ["./authorization.component.styl"]
 })
+
 export class AuthorizationComponent implements OnInit {
 
-  authorizationForm:FormGroup;
+  authorizationForm: FormGroup;
 
   constructor(
     private formBuilder: FormBuilder
@@ -17,10 +19,8 @@ export class AuthorizationComponent implements OnInit {
 
   ngOnInit() {
     this.authorizationForm = this.formBuilder.group({
-      login: [null, [Validators.required, Validators.pattern(RegExpCommon.EMAIL)]],
+      email: [null, [Validators.required, Validators.pattern(RegExpCommon.EMAIL)]],
       password: [null, Validators.required]
     })
-
   }
-
 }

@@ -1,4 +1,4 @@
-import {Component, ElementRef} from "@angular/core";
+import { Component, ElementRef, AfterViewChecked, OnInit } from "@angular/core";
 // Added new class for navigation items elements
 export class NavItem {
   name: string;
@@ -11,11 +11,11 @@ export class NavItem {
   styleUrls: ["./app.component.styl"]
 })
 
-export class AppComponent {
-  isLoginFormShow: boolean = false;
+export class AppComponent implements AfterViewChecked, OnInit {
+  isLoginFormShown: boolean = false;
+  signInElt: ElementRef;
+  loginFormElt: ElementRef;
   title: string = "Angular ITEA";
-  signInElt:ElementRef;
-  loginFormElt:ElementRef;
   // Variable with navigation items
   navItems: NavItem[] = [
     { name: "Home", link: "Home" },
@@ -24,23 +24,28 @@ export class AppComponent {
   ]
 
   constructor(
-    private elfRef:ElementRef
-  ){
-    this.signInElt = this.elfRef;
-    this.loginFormElt = this.elfRef;
-    document.addEventListener("click", (e:Event) => {
-      if (e.target !== this.signInElt.nativeElement || e.target !== this.loginFormElt.nativeElement) {
-      this.isLoginFormShow = false
+    private eltRef: ElementRef
+  ) {
+    this.signInElt = this.eltRef;
+    this.loginFormElt = this.eltRef;
+  }
+
+  showLoginForm(e: Event) {
+    e.stopPropagation();
+    this.signInElt.nativeElement = e.target;
+    this.isLoginFormShown = true;
+  }
+
+  ngAfterViewChecked() {
+    this.loginFormElt.nativeElement = document.querySelector(".login-form");
+    console.log(this.loginFormElt.nativeElement);
+  }
+
+  ngOnInit() {
+    document.addEventListener("click", (e: Event) => {
+      if((e.target !== this.signInElt.nativeElement || e.target !== this.loginFormElt.nativeElement) && this.isLoginFormShown === true ) {
+        this.isLoginFormShown = false;
       }
     })
-  }
-
-  showLoginForm(e:Event){
-    this.signInElt.nativeElement = e.target;
-    this.isLoginFormShow = true;
-  }
-
-  ngAfterViewChecked(){
-    this.loginFormElt.nativeElement = document.querySelector("app-authorization")
   }
 }

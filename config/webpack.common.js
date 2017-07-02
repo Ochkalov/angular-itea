@@ -52,9 +52,6 @@ const postcssPlugins = function () {
   ].concat(minimizeCss ? [cssnano(minimizeOptions)] : []);
 };
 
-
-
-
 module.exports = {
   "devtool": "source-map",
   "resolve": {
@@ -74,13 +71,13 @@ module.exports = {
   },
   "entry": {
     "main": [
-      "./src/main.ts"
+      "./src\\main.ts"
     ],
     "polyfills": [
-      "./src/polyfills.ts"
+      "./src\\polyfills.ts"
     ],
     "styles": [
-      "./src/styles.css"
+      "./src\\styles.css"
     ]
   },
   "output": {
@@ -116,7 +113,7 @@ module.exports = {
       },
       {
         "exclude": [
-          path.join(process.cwd(), "src/styles.css")
+          path.join(process.cwd(), "src\\styles.css")
         ],
         "test": /\.css$/,
         "use": [
@@ -128,78 +125,18 @@ module.exports = {
               "importLoaders": 1
             }
           },
-          /*{
-           "loader": "postcss-loader",
-           "options": {
-           "ident": "postcss",
-           "plugins": postcssPlugins
-           }
-           }*/
+          {
+            "loader": "postcss-loader",
+            "options": {
+              "ident": "postcss",
+              "plugins": postcssPlugins
+            }
+          }
         ]
       },
-      /*{
-       "exclude": [
-       path.join(process.cwd(), "src/styles.css")
-       ],
-       "test": /\.scss$|\.sass$/,
-       "use": [
-       "exports-loader?module.exports.toString()",
-       {
-       "loader": "css-loader",
-       "options": {
-       "sourceMap": false,
-       "importLoaders": 1
-       }
-       },
-       {
-       "loader": "postcss-loader",
-       "options": {
-       "ident": "postcss",
-       "plugins": postcssPlugins
-       }
-       },
-       {
-       "loader": "sass-loader",
-       "options": {
-       "sourceMap": false,
-       "precision": 8,
-       "includePaths": []
-       }
-       }
-       ]
-       },
-       {
-       "exclude": [
-       path.join(process.cwd(), "src/styles.css")
-       ],
-       "test": /\.less$/,
-       "use": [
-       "exports-loader?module.exports.toString()",
-       {
-       "loader": "css-loader",
-       "options": {
-       "sourceMap": false,
-       "importLoaders": 1
-       }
-       },
-       {
-       "loader": "postcss-loader",
-       "options": {
-       "ident": "postcss",
-       "plugins": postcssPlugins
-       }
-       },
-       {
-       "loader": "less-loader",
-       "options": {
-       "sourceMap": false
-       }
-       }
-       ]
-       },*/
       {
         "exclude": [
-          path.join(process.cwd(), "src/styles.css")
+          path.join(process.cwd(), "src\\styles.css")
         ],
         "test": /\.styl$/,
         "use": [
@@ -211,13 +148,13 @@ module.exports = {
               "importLoaders": 1
             }
           },
-          /*{
-           "loader": "postcss-loader",
-           "options": {
-           "ident": "postcss",
-           "plugins": postcssPlugins
-           }
-           },*/
+          {
+            "loader": "postcss-loader",
+            "options": {
+              "ident": "postcss",
+              "plugins": postcssPlugins
+            }
+          },
           {
             "loader": "stylus-loader",
             "options": {
@@ -229,7 +166,7 @@ module.exports = {
       },
       {
         "include": [
-          path.join(process.cwd(), "src/styles.css")
+          path.join(process.cwd(), "src\\styles.css")
         ],
         "test": /\.css$/,
         "use": [
@@ -252,67 +189,7 @@ module.exports = {
       },
       {
         "include": [
-          path.join(process.cwd(), "src/styles.css")
-        ],
-        "test": /\.scss$|\.sass$/,
-        "use": [
-          "style-loader",
-          {
-            "loader": "css-loader",
-            "options": {
-              "sourceMap": false,
-              "importLoaders": 1
-            }
-          },
-          {
-            "loader": "postcss-loader",
-            "options": {
-              "ident": "postcss",
-              "plugins": postcssPlugins
-            }
-          },
-          {
-            "loader": "sass-loader",
-            "options": {
-              "sourceMap": false,
-              "precision": 8,
-              "includePaths": []
-            }
-          }
-        ]
-      },
-      {
-        "include": [
-          path.join(process.cwd(), "src/styles.css")
-        ],
-        "test": /\.less$/,
-        "use": [
-          "style-loader",
-          {
-            "loader": "css-loader",
-            "options": {
-              "sourceMap": false,
-              "importLoaders": 1
-            }
-          },
-          {
-            "loader": "postcss-loader",
-            "options": {
-              "ident": "postcss",
-              "plugins": postcssPlugins
-            }
-          },
-          {
-            "loader": "less-loader",
-            "options": {
-              "sourceMap": false
-            }
-          }
-        ]
-      },
-      {
-        "include": [
-          path.join(process.cwd(), "src/styles.css")
+          path.join(process.cwd(), "src\\styles.css")
         ],
         "test": /\.styl$/,
         "use": [
@@ -354,14 +231,14 @@ module.exports = {
         "favicon.ico"
       ],
       "globOptions": {
-        "cwd": "/Users/user/Documents/GitHub/angular-itea/src",
+        "cwd": "C:\\angular-itea\\src",
         "dot": true,
         "ignore": "**/.gitkeep"
       }
     }),
     new ProgressPlugin(),
     new HtmlWebpackPlugin({
-      "template": "./src/index.html",
+      "template": "./src\\index.html",
       "filename": "./index.html",
       "hash": false,
       "inject": true,
@@ -409,10 +286,10 @@ new NamedModulesPlugin({}),
   new AotPlugin({
     "mainPath": "main.ts",
     "hostReplacementPaths": {
-      "environments/environment.ts": "environments/environment.ts"
+      "environments\\environment.ts": "environments\\environment.ts"
     },
     "exclude": [],
-    "tsConfigPath": "src/tsconfig.app.json",
+    "tsConfigPath": "src\\tsconfig.app.json",
     "skipCodeGeneration": true
   })
 ],

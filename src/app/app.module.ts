@@ -10,37 +10,27 @@ import { HttpModule } from "@angular/http";
 import { RoutingModule } from "./routing.module";
 
 import { AppComponent } from "./app.component";
+import { AuthorizationComponent } from "./authorization/authorization.component";
 import { CatalogComponent } from "./catalog/catalog.component";
 import { ContactUsComponent } from "./contact-us/contact-us.component";
 import { HomeComponent } from "./home/home.component";
 import { NotFoundComponent } from "./not-found/not-found.component";
 import { RegistrationComponent } from "./registration/registration.component";
 
-import { BoldDirective } from "./directives/bold.directive";
-import { WhileDirective } from "./directives/while.directive";
-
-import { FactorialPipe } from "./pipes/factorial.pipe";
-import { JoinPipe } from "./pipes/join.pipe";
-
 import { UsersService } from "./services/users.service";
 
-import 'hammerjs';
-import { AuthorizationComponent } from './authorization/authorization.component';
-
+// Imported hammerjs for angular/material
+import "hammerjs";
 
 @NgModule({
   declarations: [
     AppComponent,
+    AuthorizationComponent,
     CatalogComponent,
     ContactUsComponent,
     HomeComponent,
     NotFoundComponent,
-    RegistrationComponent,
-    BoldDirective,
-    WhileDirective,
-    FactorialPipe,
-    JoinPipe,
-    AuthorizationComponent
+    RegistrationComponent
   ],
   imports: [
     BrowserAnimationsModule,

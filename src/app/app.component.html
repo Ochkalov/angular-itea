@@ -24,15 +24,16 @@
       </a>
     </li>
     <li class="nav-auth__item"
-        [class.nav-auth__item-active]="isLoginFormShow"
-          (click)="showLoginForm()"
-    >
-      <a href
-         class="nav-auth__item-link">
+        [class.nav-auth__item-active]="isLoginFormShown"
+        (click)="showLoginForm($event)">
+      <a class="nav-auth__item-link">
         Sign In
       </a>
     </li>
   </nav>
+  <div class="login-form" *ngIf="isLoginFormShown">
+    <app-authorization></app-authorization>
+  </div>
 </header>
 
 <!-- Used router-outlet directive to show containing of routing module -->
