@@ -1,15 +1,39 @@
 <!-- Implemented navigation for app -->
-<nav>
-    <li *ngFor="let item of navItems">
-        <!-- Added navigation links with routerLink directive to provide app navigation beetwen components -->
-        <!-- Added routerLinkActive directive to style active link -->
-        <!-- routerLinkActiveOptions is used for applying exactly for direct link -->
-        <a [routerLink]="item.link"
-           routerLinkActive="active-link"
-           [routerLinkActiveOptions]="{exact: true}">{{item.name}}</a>
+<header class="header">
+  <nav class="nav-top">
+    <li *ngFor="let item of navItems"
+        routerLinkActive="nav-top__item-active"
+        [routerLinkActiveOptions]="{exact: true}"
+        class="nav-top__item">
+      <!-- Added navigation links with routerLink directive to provide app navigation beetwen components -->
+      <!-- Added routerLinkActive directive to style active link -->
+      <!-- routerLinkActiveOptions is used for applying exactly for direct link -->
+      <a [routerLink]="item.link"
+         class="nav-top__item-link">
+        {{item.name}}
+      </a>
     </li>
-</nav>
+  </nav>
+  <nav class="nav-auth">
+    <li class="nav-auth__item"
+        routerLinkActive="nav-auth__item-active"
+        [routerLinkActiveOptions]="{exact: true}">
+      <a routerLink="Registration"
+         class="nav-auth__item-link">
+        Sign Up
+      </a>
+    </li>
+    <li class="nav-auth__item"
+        [class.nav-auth__item-active]="isLoginFormShow"
+          (click)="showLoginForm()"
+    >
+      <a href
+         class="nav-auth__item-link">
+        Sign In
+      </a>
+    </li>
+  </nav>
+</header>
 
 <!-- Used router-outlet directive to show containing of routing module -->
 <router-outlet></router-outlet>
-

@@ -24,6 +24,10 @@ import { JoinPipe } from "./pipes/join.pipe";
 
 import { UsersService } from "./services/users.service";
 
+import 'hammerjs';
+import { AuthorizationComponent } from './authorization/authorization.component';
+
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -35,7 +39,8 @@ import { UsersService } from "./services/users.service";
     BoldDirective,
     WhileDirective,
     FactorialPipe,
-    JoinPipe
+    JoinPipe,
+    AuthorizationComponent
   ],
   imports: [
     BrowserAnimationsModule,
