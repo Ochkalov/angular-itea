@@ -1,13 +1,13 @@
-<div>
-  <form [formGroup]="authorizationForm">
-    <div>
-      <input type="email" formControlName="email">
-    </div>
-    <div>
-      <input type="password" formControlName="password">
-    </div>
-    <div>
-      <input type="submit" value="Sign In">
-    </div>
-  </form>
+<form [formGroup]="authorizationForm" class="form" *ngIf="user === null">
+  <md-input-container class="full-width">
+    <input mdInput formControlName="email" placeholder="Email">
+  </md-input-container>
+  <md-input-container class="full-width">
+    <input mdInput formControlName="password" placeholder="Password">
+  </md-input-container>
+  <button md-raised-button type="submit">Sign in</button>
+</form>
+<div *ngIf="user !== null">
+  Hello, {{user?.firstName}}
+  <button md-resize-buttom (click)="alertShow(user.firstName)"> Show Alert</button>
 </div>

@@ -1,11 +1,13 @@
 import { BrowserModule } from "@angular/platform-browser";
-// Imported Animations module fro angular animations
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { NgModule } from "@angular/core";
-// Added import of ReactiveFormsModule to work with data-driven forms
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
-// Added import of HttpModule to work with http protocol
 import { HttpModule } from "@angular/http";
+import {
+  MdButtonModule,
+  MdInputModule,
+  MdToolbarModule,
+} from "@angular/material";
 
 import { RoutingModule } from "./routing.module";
 
@@ -19,7 +21,6 @@ import { RegistrationComponent } from "./registration/registration.component";
 
 import { UsersService } from "./services/users.service";
 
-// Imported hammerjs for angular/material
 import "hammerjs";
 
 @NgModule({
@@ -37,6 +38,9 @@ import "hammerjs";
     BrowserModule,
     FormsModule,
     HttpModule,
+    MdButtonModule,
+    MdInputModule,
+    MdToolbarModule,
     ReactiveFormsModule,
     RoutingModule
   ],

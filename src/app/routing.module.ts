@@ -7,16 +7,12 @@ import { HomeComponent } from "./home/home.component";
 import { NotFoundComponent } from "./not-found/not-found.component";
 import { RegistrationComponent } from "./registration/registration.component";
 
-// Define routes
 const ROUTES: Routes = [
-  // { path: "name of path", component: "name of component class which will be binded to path" }
-  { path: "", redirectTo: "Home", pathMatch: "full" },
-  { path: "Home", component: HomeComponent },
-  // Added routes for new components
-  { path: "Catalog", component: CatalogComponent },
-  { path: "Contact-Us", component: ContactUsComponent },
-  { path: "Registration", component: RegistrationComponent },
-  // Umached path must be in the end of all routes
+  { path: "", redirectTo: "home", pathMatch: "full" },
+  { path: "home", component: HomeComponent },
+  { path: "catalog", component: CatalogComponent },
+  { path: "contact-Us", component: ContactUsComponent },
+  { path: "registration", component: RegistrationComponent },
   { path: "**", component: NotFoundComponent }
 ];
 
