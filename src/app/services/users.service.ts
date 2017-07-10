@@ -9,12 +9,14 @@ import "rxjs/add/operator/toPromise";
 @Injectable()
 export class UsersService {
 
+  private DOMAIN: string = "http://localhost:3000";
+
   constructor(
     private http: Http
   ) {}
 
   getUsers(): Promise<User[]> {
-    const URL = "./assets/users.json"
+    const URL = `${this.DOMAIN}/api/user`;
     return this.http.get(URL)
       .toPromise()
       .then(
@@ -25,9 +27,45 @@ export class UsersService {
       )
   }
 
-  registerUser(data: User): Promise<User> {
-    const URL = "api/addUser";
+  getUserById(id: number): Promise<User> {
+    const URL = `${this.DOMAIN}/api/user/${id}`;
+    return this.http.get(URL)
+      .toPromise()
+      .then(
+        response => response.json() as User
+      )
+      .catch(
+        error => this.errorHandler
+      )
+  }
+
+  registerUser(data: User): Promise<any> {
+    const URL = `${this.DOMAIN}/api/user`;
     return this.http.post(URL, data, this.headers)
+      .toPromise()
+      .then(
+        response => response.json()
+      )
+      .catch(
+        error => this.errorHandler(error)
+      )
+  }
+
+  deleteUser(id: number): Promise<any> {
+    const URL = `${this.DOMAIN}/api/user/${id}`;
+    return this.http.delete(URL)
+      .toPromise()
+      .then(
+        response => response.json()
+      )
+      .catch(
+        error => this.errorHandler(error)
+      )
+  }
+
+  editUser(user: User): Promise<User> {
+    const URL = `${this.DOMAIN}/api/user/${user.id}`;
+    return this.http.put(URL, user)
       .toPromise()
       .then(
         response => response.json() as User

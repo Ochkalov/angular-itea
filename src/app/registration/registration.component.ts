@@ -28,16 +28,44 @@ export class RegistrationComponent implements OnInit {
   onSubmitRegistration(e: Event, data: FormGroup) {
     e.preventDefault();
     this.user = this.registrationForm.value;
-    this.usersService.registerUser(this.user)
+    if(this.user.id !== null) {
+      this.usersService.editUser(this.user)
+        .then(
+          () => this.showSuccessMessage = true
+        )
+    } else {
+      this.usersService.registerUser(this.user)
+        .then(
+          res => {
+            this.user.id = res.insertId;
+            this.showSuccessMessage = true;
+          }
+        )
+        .catch(
+          e => console.error(e)
+        )
+    }
+  }
+
+  deleteUser(user: User) {
+    this.usersService.deleteUser(user.id)
       .then(
-        () => this.showSuccessMessage = true
-      )
-      .catch(
         () => {
-          this.showSuccessMessage = true;
-          console.log(this.user);
+          alert("User was deleted");
+          this.user = null;
+          this.showSuccessMessage = false;
+          this.registrationForm.reset();
         }
       )
+  }
+
+  editUser(user: User) {
+    this.showSuccessMessage = false;
+    this.registrationForm.controls["id"].setValue(user.id);
+    this.registrationForm.controls["firstName"].setValue(user.firstName);
+    this.registrationForm.controls["lastName"].setValue(user.lastName);
+    this.registrationForm.controls["email"].setValue(user.email);
+    this.registrationForm.controls["password"].setValue(user.password);
   }
 
   ngOnInit(): void {
@@ -48,7 +76,7 @@ export class RegistrationComponent implements OnInit {
       firstName: [null, Validators.required],
       lastName: [null, Validators.required],
       email: [null, [Validators.required, Validators.pattern(RegExpCommon.EMAIL)]],
-      age: [null]
+      password: [null]
     })
   }
 }

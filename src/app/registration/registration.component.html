@@ -18,7 +18,7 @@
       <input mdInput formControlName="email" placeholder="Email">
     </md-input-container>
     <md-input-container class="full-width">
-      <input mdInput formControlName="age" placeholder="Age">
+      <input mdInput formControlName="password" placeholder="Password">
     </md-input-container>
   </fieldset>
   <button md-raised-button type="submit">Register</button>
@@ -26,3 +26,9 @@
 <div class="success-message" *ngIf="showSuccessMessage">
   Thank you, {{user?.firstName}}! You successfully registered go to your email to activate account
 </div>
+<button md-raised-button (click)="deleteUser(user)">
+  Delete User
+</button>
+<button md-raised-button (click)="editUser(user)">
+  Edit User
+</button>

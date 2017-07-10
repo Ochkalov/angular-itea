@@ -2,8 +2,7 @@ import { Component, ElementRef } from "@angular/core";
 
 import { AuthorizationComponent } from "./authorization/authorization.component";
 
-
-import {User} from "./models/user";
+import { User } from "./models/user";
 
 export class NavItem {
   name: string;
@@ -21,22 +20,13 @@ export class AppComponent {
   loginElt: ElementRef;
   loginFormElt: ElementRef;
   title: string = "Angular ITEA";
-
-  user: User = {
-  id: 1,
-  firstName: "Jhon",
-  lastName: "Smit",
-  email: "jhon@smit.com",
-  age: "36"
-  };
-
-  users: User[] = new Array<User>();
+  users: User[];
 
   navItems: NavItem[] = [
     { name: "Home", link: "home" },
     { name: "Catalog", link: "catalog" },
     { name: "Contact Us", link: "contact-Us" }
-  ];
+  ]
 
   constructor(
     private eltRef: ElementRef
@@ -46,8 +36,7 @@ export class AppComponent {
   }
 
   private findAncestor(el: any, cls: String) {
-    while ((el = el.parentElement) && !el.classList.contains(cls)) {};
-    // Linter: "while statements must be braces" what does it mean?
+    while ((el = el.parentElement) && !el.classList.contains(cls)) {};  // Linter: "while statements must be braces" what does it mean?
     return el;
   }
 
@@ -55,19 +44,18 @@ export class AppComponent {
     e.stopPropagation();
     this.loginElt.nativeElement = e.target;
     this.isLoginFormShown = true;
-    document.addEventListener("click", this.hideLoginFormListener.bind(this));
+    document.addEventListener('click', this.hideLoginFormListener.bind(this));
   }
 
   private hideLoginFormListener(e: Event) {
     e.stopPropagation();
-    if (!this.findAncestor(e.target, "login-form")) {
+    if (!this.findAncestor(e.target, 'login-form')) {
       this.isLoginFormShown = false;
-      document.removeEventListener("click", this.hideLoginFormListener);
+      document.removeEventListener('click', this.hideLoginFormListener);
     }
   }
 
   showAlert(str: string) {
-    alert(str)
+    alert(str);
   }
-
 }
