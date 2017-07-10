@@ -1,3 +1,11 @@
 <p>
   catalog works!
 </p>
+<md-list>
+  <md-list-item *ngFor="let cat of categories">
+    <button md-raised-buttom (click)="onSelect(cat)">
+      {{cat?.name}}
+    </button>
+  </md-list-item>
+</md-list>
+<router-outlet></router-outlet>
