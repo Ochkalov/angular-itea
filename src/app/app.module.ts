@@ -3,15 +3,15 @@ import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { NgModule } from "@angular/core";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { HttpModule } from "@angular/http";
-import {
-  MdButtonModule,
-  MdInputModule,
-  MdTabsModule,
-  MdToolbarModule,
+import { 
+    MdButtonModule,
+    MdInputModule,
+    MdTabsModule,
+    MdToolbarModule,
 } from "@angular/material";
 
 import { AdminModule } from "./admin/admin.module";
-import { CatalogModule } from "./common/catalog.module";
+import { CatalogModule } from "./catalog/catalog.module";
 import { RoutingModule } from "./routing.module";
 
 import { AppComponent } from "./app.component";
@@ -26,30 +26,29 @@ import { UsersService } from "./services/users.service";
 import "hammerjs";
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    AuthorizationComponent,
-    ContactUsComponent,
-    HomeComponent,
-    NotFoundComponent,
-    RegistrationComponent,
-
-  ],
-  imports: [
-    AdminModule,
-    BrowserAnimationsModule,
-    BrowserModule,
-    CatalogModule,
-    FormsModule,
-    HttpModule,
-    MdButtonModule,
-    MdInputModule,
-    MdTabsModule,
-    MdToolbarModule,
-    ReactiveFormsModule,
-    RoutingModule
-  ],
-  providers: [UsersService],
-  bootstrap: [AppComponent]
+    declarations: [
+        AppComponent,
+        AuthorizationComponent,
+        ContactUsComponent,
+        HomeComponent,
+        NotFoundComponent,
+        RegistrationComponent
+    ],
+    imports: [
+        AdminModule,
+        BrowserAnimationsModule,
+        BrowserModule,
+        CatalogModule,
+        FormsModule,
+        HttpModule,
+        MdButtonModule,
+        MdInputModule,
+        MdTabsModule,
+        MdToolbarModule,
+        ReactiveFormsModule,
+        RoutingModule
+    ],
+    providers: [UsersService],
+    bootstrap: [AppComponent]
 })
 export class AppModule { }

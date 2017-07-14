@@ -1,14 +1,13 @@
-<!--<form [formGroup]="authorizationForm" class="form" *ngIf="user === null">
-  <md-input-container class="full-width">
-    <input mdInput formControlName="email" placeholder="Email">
-  </md-input-container>
-  <md-input-container class="full-width">
-    <input mdInput formControlName="password" placeholder="Password">
-  </md-input-container>
-  <button md-raised-button type="submit">Sign in</button>
-</form>-->
-<div >
-  {{message}}
-  <button md-resize-buttom (click)="logIn()"> Log In</button>
-  <button md-resize-buttom (click)="logOut()"> Log Out</button>
+<form [formGroup]="authorizationForm" class="form" *ngIf="user === null">
+    <md-input-container class="full-width">
+        <input mdInput formControlName="email" placeholder="Email">
+    </md-input-container>
+    <md-input-container class="full-width">
+        <input mdInput formControlName="password" placeholder="Password">
+    </md-input-container>
+    <button md-raised-button type="submit">Sign in</button>
+</form>
+<div *ngIf="user !== null">
+    Hello, {{user?.firstName}}
+    <button md-raised-button (click)="showAlert(user.firstName)">Show alert!</button>
 </div>

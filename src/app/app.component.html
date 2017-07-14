@@ -1,18 +1,21 @@
 <md-toolbar color="primary">
-  <a md-button
-     *ngFor="let navItem of navItems"
-     [routerLink]="navItem.link">
-    {{navItem.name}}
-  </a>
-  <span class="spacer"></span>
-  <a md-button
-     routerLink="/registration">
-    Sign up
-  </a>
-  <a md-button
-    routerLink="/login">
-    Sign in
-  </a>
+    <a md-button 
+       *ngFor="let navItem of navItems"
+       [routerLink]="navItem.link">
+        {{navItem.name}}
+    </a>
+    <span class="spacer"></span>
+    <a md-button
+       routerLink="/registration">
+       Sign up
+    </a>
+    <a md-button
+       (click)="showLoginForm($event)">
+       Sign in
+    </a>
 </md-toolbar>
-
+<div class="login-form" *ngIf="isLoginFormShown">
+    <app-authorization [user]="user" (onAlerted)="showAlert($event)"></app-authorization>
+</div>
 <router-outlet></router-outlet>
+

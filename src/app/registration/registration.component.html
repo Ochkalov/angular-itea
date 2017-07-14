@@ -1,34 +1,34 @@
 <form [formGroup]="registrationForm" *ngIf="!showSuccessMessage" class="form" (ngSubmit)="onSubmitRegistration($event, registrationForm)">
-  <fieldset>
-    <table class="full-width" cellspacing="0">
-      <tr>
-        <td>
-          <md-input-container class="full-width">
-            <input mdInput formControlName="firstName" placeholder="First name">
-          </md-input-container>
-        </td>
-        <td>
-          <md-input-container class="full-width">
-            <input mdInput formControlName="lastName" placeholder="Last name">
-          </md-input-container>
-        </td>
-      </tr>
-    </table>
-    <md-input-container class="full-width">
-      <input mdInput formControlName="email" placeholder="Email">
-    </md-input-container>
-    <md-input-container class="full-width">
-      <input mdInput formControlName="password" placeholder="Password">
-    </md-input-container>
-  </fieldset>
-  <button md-raised-button type="submit">Register</button>
+    <fieldset>
+        <table class="full-width" cellspacing="0">
+            <tr>
+                <td>
+                    <md-input-container class="full-width">
+                        <input mdInput formControlName="firstName" placeholder="First name">
+                    </md-input-container>
+                </td>
+                <td>
+                    <md-input-container class="full-width">
+                        <input mdInput formControlName="lastName" placeholder="Last name">
+                    </md-input-container>
+                </td>
+            </tr>
+        </table>
+        <md-input-container class="full-width">
+            <input mdInput formControlName="email" placeholder="Email">
+        </md-input-container>
+        <md-input-container class="full-width">
+            <input mdInput formControlName="password" placeholder="Password">
+        </md-input-container>
+    </fieldset>
+    <button md-raised-button type="submit">Register</button>
 </form>
 <div class="success-message" *ngIf="showSuccessMessage">
-  Thank you, {{user?.firstName}}! You successfully registered go to your email to activate account
+    Thank you, {{user?.firstName}}! You successfully registered go to your email to activate account
 </div>
 <button md-raised-button (click)="deleteUser(user)">
-  Delete User
+    Delete User
 </button>
 <button md-raised-button (click)="editUser(user)">
-  Edit User
+    Edit User
 </button>

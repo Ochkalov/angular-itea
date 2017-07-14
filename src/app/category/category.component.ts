@@ -5,32 +5,25 @@ import { Category } from "../models/category";
 import { CategoriesService } from "../services/categories.service";
 
 @Component({
-  selector: "app-category",
-  templateUrl: "./category.component.html",
-  styleUrls: ["./category.component.styl"]
+    selector: "app-category",
+    templateUrl: "./category.component.html",
+    styleUrls: ["./category.component.styl"]
 })
 export class CategoryComponent implements OnInit {
+  
+    category: Category;
 
-  category: Category;
-  editCategory: Category;
+    constructor(
+        private categoriesService: CategoriesService,
+        private activatedRoute: ActivatedRoute
+    ) { }
 
-  constructor(
-    private categoriesService: CategoriesService,
-    private activatedRoute: ActivatedRoute
-  ) { }
-
-  ngOnInit() {
-    let id: number = this.activatedRoute.snapshot.params["id"];
-    this.categoriesService.getCategoryById(id)
-      .subscribe(
-        category => this.category = category,
-        error => console.error(error)
-      )
-  }
-
-  canDeactivate() {
-    if (!this.category || this.category.name || this.editCategory.name) {
-
+    ngOnInit() {
+        let id: number = this.activatedRoute.snapshot.params["id"];
+        this.categoriesService.getCategoryById(id)
+                              .subscribe(
+                                  category => this.category = category,
+                                  error => console.error(error)
+                              )
     }
-  }
 }
