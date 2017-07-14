@@ -10,11 +10,9 @@
     Sign up
   </a>
   <a md-button
-     (click)="showLoginForm($event)">
+    routerLink="/login">
     Sign in
   </a>
 </md-toolbar>
-<div class="login-form" *ngIf="isLoginFormShown">
-  <app-authorization [user]="user" (onAlerted)="showAlert($event)"></app-authorization>
-</div>
+
 <router-outlet></router-outlet>

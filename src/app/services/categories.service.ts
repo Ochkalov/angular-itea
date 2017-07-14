@@ -1,29 +1,29 @@
-import {Observable} from "rxjs/Observable";
-import {Injectable} from "@angular/core";
-import {Http, Response} from "@angular/http";
+import { Injectable } from "@angular/core";
+import { Http, Response } from "@angular/http";
 
+import { LinksCommon } from "../common/links.common";
+import { Category } from "../models/category";
 
-import {LinksCommon} from "../common/links.common";
+import { Observable } from "rxjs/Observable";
 import "rxjs/add/operator/catch";
 import "rxjs/add/operator/map";
-import {Category} from "../models/category";
 
-@Injectable ()
-export class CategoriesServise {
+@Injectable()
+export class CategoriesService {
+
   private endpoint: string = `${LinksCommon.ENDPOINT}category/`;
-  private headers: Headers = new Headers({
-    "Content-Type": "aplication/json"
-  });
+  private headers: Headers = new Headers({ "Content-Type": "application/json" });
 
-  constructor(private  http: Http) {
-  }
+  constructor(
+    private http: Http
+  ) {}
 
   getCategories(): Observable<Category[]> {
     return this.http.get(this.endpoint)
       .map(
         response => response.json() as Category[]
       )
-      .catch(this.errorHendler)
+      .catch(this.errorHandler)
   }
 
   getCategoryById(id: any): Observable<Category> {
@@ -32,19 +32,44 @@ export class CategoriesServise {
       .map(
         response => response.json() as Category
       )
-      .catch(this.errorHendler)
+      .catch(this.errorHandler)
   }
 
-  /*addCategory(data: Category): Promise<any> {
-    return this.http.post()
-  }*/
+  addCategory(data: Category): Promise<any> {
+    return this.http.post(this.endpoint, data, this.headers)
+      .toPromise()
+      .then(
+        response => response.json()
+      )
+      .catch(this.errorHandler)
+  }
 
-  private errorHendler(error: Response | any) {
+  deleteCategory(id: number): Promise<any> {
+    const URL = `${this.endpoint}${id}`;
+    return this.http.delete(URL)
+      .toPromise()
+      .then(
+        response => response.json()
+      )
+      .catch(this.errorHandler)
+  }
+
+  editCategory(Category: Category): Promise<Category> {
+    const URL = `${this.endpoint}${Category.id}`;
+    return this.http.put(URL, Category)
+      .toPromise()
+      .then(
+        response => response.json() as Category
+      )
+      .catch(this.errorHandler)
+  }
+
+  private errorHandler(error: Response | any) {
     let errMsg: string;
     if (error instanceof Response) {
       const body = error.json() || "";
       const err = body.error || JSON.stringify(body);
-      errMsg = `${error.status} -  ${error.statusText || ""} ${err}`;
+      errMsg = `${error.status} - ${error.statusText || ''} ${err}`;
     } else {
       errMsg = error.message ? error.message : error.toString();
     }

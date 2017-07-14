@@ -1,8 +1,15 @@
 import { Component, OnInit, Input, EventEmitter, Output } from "@angular/core";
-import { FormBuilder, FormGroup, Validators } from "@angular/forms";
+import {Router} from "@angular/router";
+import {AuthService} from "../services/auth.srvice";
 
+
+
+import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { RegExpCommon } from "../common/regexp.common";
 import { User } from "../models/user"
+
+
+
 
 @Component({
   selector: "app-authorization",
@@ -10,10 +17,39 @@ import { User } from "../models/user"
   styleUrls: ["./authorization.component.styl"]
 })
 
-export class AuthorizationComponent implements OnInit {
+export class AuthorizationComponent {
+  message: string;
 
 
-  @Input() user: User;
+  constructor(
+    public authService: AuthService,
+    public router: Router
+  ){}
+
+  logIn() {
+      this.message = "Loggin in..";
+      this.authService.logIn().subscribe(
+        () => {
+          if (this.authService.isLoggedIn) {
+            let redirect = this.authService.redirectUrl ?
+              this.authService.redirectUrl : "/admin";
+
+            this.router.navigate([redirect])
+          }
+        }
+      )
+  }
+
+  logOut(){
+    this.authService.logOut();
+    this.setMessage();
+  }
+
+  setMessage() {
+    this.message = `You are logged ${this.authService.isLoggedIn ? "in" : "out"}`
+  }
+
+  /*@Input() user: User;
 
   @Output() onAlerted = new EventEmitter<string>();
 
@@ -35,5 +71,5 @@ export class AuthorizationComponent implements OnInit {
       email: [null, [Validators.required, Validators.pattern(RegExpCommon.EMAIL)]],
       password: [null, Validators.required]
     })
-  }
+  }*/
 }

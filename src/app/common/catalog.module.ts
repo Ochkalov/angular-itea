@@ -1,26 +1,30 @@
-import {CommonModule} from "@angular/common";
-import {NgModule} from "@angular/core";
-import {CategoriesServise} from "../services/categories.service";
-import {CatalogComponent} from "../catalog/catalog.component";
-import {CatalogRoutingModule} from "../catalog/catalog-routing.module";
-import {MdButtonModule, MdListModule} from "@angular/material";
-import {CategoryComponent} from "../category/category.component";
+import { NgModule } from "@angular/core";
+import { CommonModule } from "@angular/common";
+import {
+  MdButtonModule,
+  MdListModule
+} from "@angular/material";
+
+import { CatalogComponent } from "../catalog/catalog.component";
+import { CategoryComponent } from "../category/category.component";
+
+import { CatalogRoutingModule } from "../catalog/catalog-routing.module";
+import { CategoriesService } from "../services/categories.service";
 
 @NgModule({
-  declarations: [CatalogComponent,
-    CategoryComponent
-  ],
-  imports: [CommonModule,
+  imports: [
+    CommonModule,
     CatalogRoutingModule,
     MdButtonModule,
     MdListModule
-
   ],
-  providers: [CategoriesServise],
+  declarations: [
+    CatalogComponent,
+    CategoryComponent
+  ],
+  providers: [
+    CategoriesService
+  ]
 })
 
-
-export class CatalogModule {
-
-}
-
+export class CatalogModule { }

@@ -6,9 +6,12 @@ import { HttpModule } from "@angular/http";
 import {
   MdButtonModule,
   MdInputModule,
+  MdTabsModule,
   MdToolbarModule,
 } from "@angular/material";
 
+import { AdminModule } from "./admin/admin.module";
+import { CatalogModule } from "./common/catalog.module";
 import { RoutingModule } from "./routing.module";
 
 import { AppComponent } from "./app.component";
@@ -21,7 +24,6 @@ import { RegistrationComponent } from "./registration/registration.component";
 import { UsersService } from "./services/users.service";
 
 import "hammerjs";
-import {CatalogModule} from "./common/catalog.module";
 
 @NgModule({
   declarations: [
@@ -30,19 +32,23 @@ import {CatalogModule} from "./common/catalog.module";
     ContactUsComponent,
     HomeComponent,
     NotFoundComponent,
-    RegistrationComponent
+    RegistrationComponent,
+
   ],
   imports: [
+    AdminModule,
     BrowserAnimationsModule,
     BrowserModule,
+    CatalogModule,
     FormsModule,
     HttpModule,
     MdButtonModule,
     MdInputModule,
+    MdTabsModule,
     MdToolbarModule,
     ReactiveFormsModule,
-    RoutingModule,
-    CatalogModule],
+    RoutingModule
+  ],
   providers: [UsersService],
   bootstrap: [AppComponent]
 })

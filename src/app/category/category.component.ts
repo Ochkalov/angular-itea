@@ -1,23 +1,26 @@
-import { Component, OnInit } from '@angular/core';
-import {Category} from "../models/category";
-import {CategoriesServise} from "../services/categories.service";
-import {ActivatedRoute} from "@angular/router";
+import { Component, OnInit } from "@angular/core";
+import { ActivatedRoute, Params } from "@angular/router";
+
+import { Category } from "../models/category";
+import { CategoriesService } from "../services/categories.service";
 
 @Component({
-  selector: 'app-category',
-  templateUrl: './category.component.html',
-  styleUrls: ['./category.component.css']
+  selector: "app-category",
+  templateUrl: "./category.component.html",
+  styleUrls: ["./category.component.styl"]
 })
 export class CategoryComponent implements OnInit {
-    category: Category;
+
+  category: Category;
+  editCategory: Category;
 
   constructor(
-    private categoriesService: CategoriesServise,
-    private activatedRouter: ActivatedRoute
+    private categoriesService: CategoriesService,
+    private activatedRoute: ActivatedRoute
   ) { }
 
   ngOnInit() {
-    let id: number = this.activatedRouter.snapshot.params["id"];
+    let id: number = this.activatedRoute.snapshot.params["id"];
     this.categoriesService.getCategoryById(id)
       .subscribe(
         category => this.category = category,
@@ -25,4 +28,9 @@ export class CategoryComponent implements OnInit {
       )
   }
 
+  canDeactivate() {
+    if (!this.category || this.category.name || this.editCategory.name) {
+
+    }
+  }
 }

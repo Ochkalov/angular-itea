@@ -26,6 +26,7 @@ export class AppComponent {
     { name: "Home", link: "home" },
     { name: "Catalog", link: "catalog" },
     { name: "Contact Us", link: "contact-Us" }
+    { name: "Admin", link: "admin" }
   ]
 
   constructor(

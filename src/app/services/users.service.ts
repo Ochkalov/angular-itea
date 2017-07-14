@@ -1,7 +1,7 @@
 import { Injectable } from "@angular/core";
-// Import Http to work with http protocol
 import { Http, Response } from "@angular/http";
 
+import { LinksCommon } from "../common/links.common";
 import { User } from "../models/user";
 
 import "rxjs/add/operator/toPromise";
@@ -9,15 +9,15 @@ import "rxjs/add/operator/toPromise";
 @Injectable()
 export class UsersService {
 
-  private DOMAIN: string = "http://localhost:3000";
+  private endpoint: string = `${LinksCommon.ENDPOINT}user/`;
+  private headers: Headers = new Headers({ "Content-Type": "application/json" });
 
   constructor(
     private http: Http
   ) {}
 
   getUsers(): Promise<User[]> {
-    const URL = `${this.DOMAIN}/api/user`;
-    return this.http.get(URL)
+    return this.http.get(this.endpoint)
       .toPromise()
       .then(
         response => response.json() as User[]
@@ -28,7 +28,7 @@ export class UsersService {
   }
 
   getUserById(id: number): Promise<User> {
-    const URL = `${this.DOMAIN}/api/user/${id}`;
+    const URL = `${this.endpoint}${id}`;
     return this.http.get(URL)
       .toPromise()
       .then(
@@ -40,8 +40,7 @@ export class UsersService {
   }
 
   registerUser(data: User): Promise<any> {
-    const URL = `${this.DOMAIN}/api/user`;
-    return this.http.post(URL, data, this.headers)
+    return this.http.post(this.endpoint, data, this.headers)
       .toPromise()
       .then(
         response => response.json()
@@ -52,7 +51,7 @@ export class UsersService {
   }
 
   deleteUser(id: number): Promise<any> {
-    const URL = `${this.DOMAIN}/api/user/${id}`;
+    const URL = `${this.endpoint}${id}`;
     return this.http.delete(URL)
       .toPromise()
       .then(
@@ -64,7 +63,7 @@ export class UsersService {
   }
 
   editUser(user: User): Promise<User> {
-    const URL = `${this.DOMAIN}/api/user/${user.id}`;
+    const URL = `${this.endpoint}${user.id}`;
     return this.http.put(URL, user)
       .toPromise()
       .then(
@@ -78,6 +77,4 @@ export class UsersService {
   private errorHandler(err: Error) {
     return console.error(err)
   }
-
-  private headers: Headers = new Headers({ "Content-Type": "application/json" });
 }
