@@ -25,7 +25,8 @@ export class AppComponent {
     navItems: NavItem[] = [
         { name: "Home", link: "home" },
         { name: "Catalog", link: "catalog" },
-        { name: "Contact Us", link: "contact-Us" }
+        { name: "Contact Us", link: "contact-us" },
+        { name: "Admin", link: "admin" }
     ]
 
     constructor(

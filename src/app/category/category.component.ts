@@ -12,6 +12,7 @@ import { CategoriesService } from "../services/categories.service";
 export class CategoryComponent implements OnInit {
   
     category: Category;
+    editCategory: Category;
 
     constructor(
         private categoriesService: CategoriesService,
@@ -25,5 +26,13 @@ export class CategoryComponent implements OnInit {
                                   category => this.category = category,
                                   error => console.error(error)
                               )
+    }
+
+    canDeactivate() {
+        if(!this.category || this.category.name === this.editCategory.name) {
+            return true;
+        }
+
+        return confirm("Discard changes?");
     }
 }

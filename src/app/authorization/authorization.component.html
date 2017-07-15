@@ -1,4 +1,4 @@
-<form [formGroup]="authorizationForm" class="form" *ngIf="user === null">
+<!-- <form [formGroup]="authorizationForm" class="form" *ngIf="user === null">
     <md-input-container class="full-width">
         <input mdInput formControlName="email" placeholder="Email">
     </md-input-container>
@@ -6,8 +6,9 @@
         <input mdInput formControlName="password" placeholder="Password">
     </md-input-container>
     <button md-raised-button type="submit">Sign in</button>
-</form>
-<div *ngIf="user !== null">
-    Hello, {{user?.firstName}}
-    <button md-raised-button (click)="showAlert(user.firstName)">Show alert!</button>
+</form> -->
+<div>
+    {{message}}
+    <button md-raised-button (click)="logIn()">Log In</button>
+    <button md-raised-button (click)="logOut()">Log Out</button>
 </div>
