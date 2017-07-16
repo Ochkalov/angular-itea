@@ -10,7 +10,7 @@ import { CategoriesService } from "../services/categories.service";
     styleUrls: ["./category.component.styl"]
 })
 export class CategoryComponent implements OnInit {
-  
+
     category: Category;
     editCategory: Category;
 
@@ -22,7 +22,7 @@ export class CategoryComponent implements OnInit {
     ngOnInit() {
         let id: number = this.activatedRoute.snapshot.params["id"];
         this.categoriesService.getCategoryById(id)
-                              .subscribe(
+                              .then(
                                   category => this.category = category,
                                   error => console.error(error)
                               )

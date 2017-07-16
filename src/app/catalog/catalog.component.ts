@@ -17,7 +17,7 @@ export class CatalogComponent implements OnInit {
     constructor(
         private categoriesService: CategoriesService,
         private activatedRoute: ActivatedRoute,
-        private router: Router  
+        private router: Router
     ) { }
 
     onSelect(category: Category) {
@@ -27,7 +27,7 @@ export class CatalogComponent implements OnInit {
 
     ngOnInit() {
         this.categoriesService.getCategories()
-                              .subscribe(
+                              .then(
                                   categories => this.categories = categories,
                                   error => console.error(error)
                               )

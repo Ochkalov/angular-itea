@@ -10,6 +10,8 @@ import { CategoryComponent } from "../category/category.component";
 
 import { CatalogRoutingModule } from "./catalog-routing.module";
 import { CategoriesService } from "../services/categories.service";
+import {CanDeactivateGuardService} from "../services/can-deactivate-guard.service";
+import {CatalogResolveService} from "../services/catalog-resolver.service";
 
 @NgModule({
     imports: [
@@ -23,7 +25,9 @@ import { CategoriesService } from "../services/categories.service";
         CategoryComponent
     ],
     providers: [
-        CategoriesService
+        CategoriesService,
+        CanDeactivateGuardService,
+        CatalogResolveService
     ]
 })
 

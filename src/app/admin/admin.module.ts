@@ -15,8 +15,7 @@ import { AuthGuardService } from "../services/auth-guard.service";
 @NgModule({
     imports: [
         AdminRoutingModule,
-        CommonModule
-    ],
+        CommonModule],
     declarations: [
         AdminComponent,
         AdminDashboardComponent,

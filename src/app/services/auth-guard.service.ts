@@ -1,10 +1,11 @@
 import { Injectable } from "@angular/core";
-import { 
-    CanActivate,
-    CanActivateChild, 
-    Router,
-    ActivatedRouteSnapshot,
-    RouterStateSnapshot 
+import {
+  CanActivate,
+  CanActivateChild,
+  CanLoad,
+  Router,
+  ActivatedRouteSnapshot,
+  RouterStateSnapshot, Route, Routes
 } from "@angular/router";
 
 import { AuthService } from "./auth.service";
@@ -13,9 +14,12 @@ import { AuthService } from "./auth.service";
 export class AuthGuardService implements CanActivate, CanActivateChild {
     constructor(
         private authService: AuthService,
-        private router: Router
-    ) {}
+        private router: Router) {}
 
+    canLoad(route: Route) {
+      let url = `${route.path}`;
+      return this.checkLogin(url)
+    }
     canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
         console.log("AuthGuard#CanActivate called");
         let url: string = state.url;
